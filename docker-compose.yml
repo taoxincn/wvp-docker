@@ -1,0 +1,74 @@
+version: "3"
+services:
+  mysql:
+    image: mysql
+    restart: always
+    networks:
+      - network-wvp
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./wvp/sql:/docker-entrypoint-initdb.d
+
+  redis:
+    image: redis:alpine
+    restart: always
+    networks:
+      - network-wvp
+    volumes:
+      - redis-data:/data
+    depends_on:
+      - mysql
+
+  zlm:
+    image: taoxin/zlm
+    restart: always
+    networks:
+      - network-wvp
+    ports:
+      - 8088:8088
+      - 8089:8089
+      - 1935:1935
+      - 554:554
+      - 554:554/udp
+      - 10000:10000
+      - 10000:10000/udp
+      - 30000-30009:30000-30009
+      - 30000-30009:30000-30009/udp
+      - 8000:8000/udp
+      - 9000:9000
+    environment:
+      - SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee
+    depends_on:
+      - redis
+
+  wvp:
+    image: taoxin/wvp
+    restart: always
+    networks:
+      - network-wvp
+    environment:
+      - WVP_HOST=10.0.0.109
+      - WVP_PORT=5060
+      - WVP_DOMAIN=6202020049
+      - WVP_ID=62020200492000000001
+      - WVP_PWD=abcd1234
+      - ZLM_HOST=10.0.0.109
+      - ZLM_PORT=8088
+      - ZLM_SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee
+      - WVP_JVM_CONFIG=-Xms128m -Xmx256m
+    ports:
+      - 18080:18080
+      - 5060:5060
+      - 5060:5060/udp
+    depends_on:
+      - zlm
+
+networks:
+  network-wvp:
+
+
+volumes:
+  redis-data:
+  mysql-data:
