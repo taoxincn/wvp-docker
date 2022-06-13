@@ -12,7 +12,7 @@
 cd wvp-docker
 vim docker-compose.yml
 ```
-这里`WVP_HOST`和`ZLM_HOST`改成自己的公网IP地址，别的更具需要修改。
+这里`WVP_HOST`和`ZLM_HOST`改成自己的公网IP地址，别的按需要修改。
 
 ### 第三步 运行
 `docker-compose up -d`
