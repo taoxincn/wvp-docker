@@ -39,7 +39,9 @@ services:
       - 8000:8000/udp
       - 9000:9000
     environment:
+      - SERVERID=DefaultMediaServer
       - SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee
+      - PORT=8088
     depends_on:
       - redis
 
@@ -51,9 +53,10 @@ services:
     environment:
       - WVP_HOST=10.0.0.109
       - WVP_PORT=5060
-      - WVP_DOMAIN=6202020049
-      - WVP_ID=62020200492000000001
+      - WVP_DOMAIN=6202000049
+      - WVP_ID=62020000492000000001
       - WVP_PWD=abcd1234
+      - ZLM_ID=DefaultMediaServer
       - ZLM_HOST=10.0.0.109
       - ZLM_PORT=8088
       - ZLM_SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee

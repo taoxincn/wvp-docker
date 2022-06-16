@@ -50,7 +50,7 @@ sip:
 media:
   # [必须修改] zlm服务器唯一id，用于触发hook时区别是哪台服务器,general.mediaServerId
   #${ZLM_ID:default}
-  id: DefaultMediaServer
+  id: ${ZLM_ID:DefaultMediaServer}
   # [必须修改] zlm服务器的内网IP
   ip: ${ZLM_HOST:zlm}
   # [必须修改] zlm服务器的http.port
