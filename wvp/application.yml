@@ -75,8 +75,8 @@ logging:
 # [根据业务需求配置]
 user-settings:
   # 推流直播是否录制
-  record-push-live: true
-  auto-apply-play: true
+  record-push-live: false
+  auto-apply-play: false
 
 # 在线文档： swagger-ui（生产环境建议关闭）
 swagger-ui:
