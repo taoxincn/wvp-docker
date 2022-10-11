@@ -76,7 +76,8 @@ logging:
 user-settings:
   # 推流直播是否录制
   record-push-live: false
-  auto-apply-play: false
+  # [可选] 自动点播， 使用固定流地址进行播放时，如果未点播则自动进行点播, 需要rtp.enable=true
+  auto-apply-play: true
 
 # 在线文档： swagger-ui（生产环境建议关闭）
 swagger-ui:
