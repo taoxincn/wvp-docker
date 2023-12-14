@@ -20,10 +20,10 @@ spring:
   datasource:
     # 使用mysql 打开23-28行注释， 删除29-36行
     name: wvp
-    url: jdbc:mysql://mysql:3306/wvp?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://mysql:3306/wvp?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&allowMultiQueries=true&useSSL=false&allowMultiQueries=true
     username: root
     password: root
-    type: com.alibaba.druid.pool.DruidDataSource
+    type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 # [可选] WVP监听的HTTP端口, 网页和接口调用都是这个端口
@@ -32,8 +32,11 @@ server:
 
 # 作为28181服务器的配置
 sip:
-  # [必须修改] 本机的IP
-  ip: ${WVP_HOST}
+  # [必须修改] 本机的IP，对应你的网卡，监听什么ip就是使用什么网卡，
+  # 如果要监听多张网卡，可以使用逗号分隔多个IP， 例如： 192.168.1.4,10.0.0.4
+  # 如果不明白，就使用0.0.0.0，大部分情况都是可以的
+  # 请不要使用127.0.0.1，任何包括localhost在内的域名都是不可以的。
+  ip: ${WVP_HOST:0.0.0.0}
   # [可选] 28181服务监听的端口
   port: ${WVP_PORT:5060}
   # 根据国标6.1.2中规定，domain宜采用ID统一编码的前十位编码。国标附录D中定义前8位为中心编码（由省级、市级、区级、基层编号组成，参照GB/T 2260-2007）
@@ -49,7 +52,6 @@ sip:
 #zlm 默认服务器配置
 media:
   # [必须修改] zlm服务器唯一id，用于触发hook时区别是哪台服务器,general.mediaServerId
-  #${ZLM_ID:default}
   id: ${ZLM_ID:DefaultMediaServer}
   # [必须修改] zlm服务器的内网IP
   ip: ${ZLM_HOST:zlm}
@@ -65,26 +67,9 @@ media:
     port-range: 30000,30200 # 端口范围
     # [可选] 国标级联在此范围内选择端口发送媒体流,
     send-port-range: 30000,30200 # 端口范围
-  # 录像辅助服务， 部署此服务可以实现zlm录像的管理与下载， 0 表示不使用
-  record-assist-port: 0
-
-# [可选] 日志配置, 一般不需要改
-logging:
-  config: classpath:logback-spring-local.xml
 
 # [根据业务需求配置]
 user-settings:
   # 推流直播是否录制
   record-push-live: false
-  # [可选] 自动点播， 使用固定流地址进行播放时，如果未点播则自动进行点播, 需要rtp.enable=true
   auto-apply-play: true
-
-# 在线文档： swagger-ui（生产环境建议关闭）
-swagger-ui:
-  enabled: true
-
-# 版本信息， 不需修改
-version:
-  version: "@project.version@"
-  description: "@project.description@"
-  artifact-id: "@project.artifactId@"

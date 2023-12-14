@@ -51,13 +51,13 @@ services:
     networks:
       - network-wvp
     environment:
-      - WVP_HOST=192.168.199.174
+      - WVP_HOST=0.0.0.0
       - WVP_PORT=5060
       - WVP_DOMAIN=6202000049
       - WVP_ID=62020000492000000001
       - WVP_PWD=abcd1234
       - ZLM_ID=DefaultMediaServer
-      - ZLM_HOST=192.168.199.174
+      - ZLM_HOST=zlm
       - ZLM_PORT=8088
       - ZLM_SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee
       - WVP_JVM_CONFIG=-Xms128m -Xmx256m
