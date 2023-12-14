@@ -50,6 +50,7 @@ COPY --from=build /opt/media/ZLMediaKit/release/linux/${MODEL}/MediaServer /opt/
 COPY --from=build /opt/media/ZLMediaKit/www/ /opt/media/bin/www/
 COPY config.ini /opt/media/conf/config.ini
 COPY docker-entrypoint.sh /opt/media/docker-entrypoint.sh
+RUN chmod +x /opt/media/docker-entrypoint.sh
 
 WORKDIR /opt/media
 ENTRYPOINT ["/opt/media/docker-entrypoint.sh"]
