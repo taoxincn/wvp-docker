@@ -22,7 +22,7 @@ services:
       - mysql
 
   zlm:
-    image: taoxin/zlm
+    build: ./zlm
     restart: always
     networks:
       - network-wvp
@@ -46,7 +46,7 @@ services:
       - redis
 
   wvp:
-    image: taoxin/wvp
+    build: ./wvp
     restart: always
     networks:
       - network-wvp
