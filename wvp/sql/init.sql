@@ -1,3 +1,9 @@
+create database wvp;
+
+use wvp;
+
+/* 以上2句别删，修改脚本从下面开始粘贴 */
+
 /*建表*/
 create table wvp_device (
     id serial primary key,
