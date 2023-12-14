@@ -1,6 +1,3 @@
-create database wvp;
-use wvp;
-
 /*建表*/
 create table wvp_device (
                             id serial primary key ,
