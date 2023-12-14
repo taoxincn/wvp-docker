@@ -36,7 +36,9 @@ sip:
   # 如果要监听多张网卡，可以使用逗号分隔多个IP， 例如： 192.168.1.4,10.0.0.4
   # 如果不明白，就使用0.0.0.0，大部分情况都是可以的
   # 请不要使用127.0.0.1，任何包括localhost在内的域名都是不可以的。
-  ip: ${WVP_HOST:0.0.0.0}
+  ip: 0.0.0.0
+  # [可选] 没有任何业务需求，仅仅是在前端展示的时候用
+  show-ip:  ${WVP_SHOW_IP:0.0.0.0}
   # [可选] 28181服务监听的端口
   port: ${WVP_PORT:5060}
   # 根据国标6.1.2中规定，domain宜采用ID统一编码的前十位编码。国标附录D中定义前8位为中心编码（由省级、市级、区级、基层编号组成，参照GB/T 2260-2007）
@@ -54,7 +56,13 @@ media:
   # [必须修改] zlm服务器唯一id，用于触发hook时区别是哪台服务器,general.mediaServerId
   id: ${ZLM_ID:DefaultMediaServer}
   # [必须修改] zlm服务器的内网IP
-  ip: ${ZLM_HOST:zlm}
+  ip: ${ZLM_IP:zlm}
+  # [可选] 返回流地址时的ip，置空使用 media.ip
+  stream-ip: ${STREAM_IP:0.0.0.0}
+  # [可选] wvp在国标信令中使用的ip，此ip为摄像机可以访问到的ip， 置空使用 media.ip
+  sdp-ip: ${SDP_IP:0.0.0.0}
+  # [可选] zlm服务器的hook所使用的IP, 默认使用sip.ip
+  hook-ip: ${HOOK_IP:wvp}
   # [必须修改] zlm服务器的http.port
   http-port: ${ZLM_PORT:8088}
   # [可选] zlm服务器的hook.admin_params=secret
@@ -72,4 +80,5 @@ media:
 user-settings:
   # 推流直播是否录制
   record-push-live: false
-  auto-apply-play: true
+  # 国标是否录制
+  record-sip: false

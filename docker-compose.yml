@@ -51,15 +51,18 @@ services:
     networks:
       - network-wvp
     environment:
-      - WVP_HOST=0.0.0.0
-      - WVP_PORT=5060
+      - STREAM_IP=0.0.0.0 #流IP，外网
+      - SDP_IP=0.0.0.0 #SDP协议IP，国标信令中使用的IP，此IP为摄像机可以访问到的IP，外网
+      - HOOK_IP=wvp #zlm服务器访问wvp的IP
+      - WVP_SHOW_IP=0.0.0.0 #对外显示IP，一般用外网
+      - WVP_PORT=5060 #国标端口
       - WVP_DOMAIN=6202000049
       - WVP_ID=62020000492000000001
       - WVP_PWD=abcd1234
-      - ZLM_ID=DefaultMediaServer
-      - ZLM_HOST=zlm
-      - ZLM_PORT=8088
-      - ZLM_SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee
+      - ZLM_ID=DefaultMediaServer #与zlm服务的'SERVERID'保持一致
+      - ZLM_IP=zlm #zlm服务内网IP
+      - ZLM_PORT=8088 #zlm服务http端口，与zlm服务的'PORT'保持一致
+      - ZLM_SECRET=035c73f7-bb6b-4889-a715-d9eb2d1925ee #与zlm服务的'SECRET'保持一致
       - WVP_JVM_CONFIG=-Xms128m -Xmx256m
     ports:
       - 18080:18080
@@ -70,7 +73,6 @@ services:
 
 networks:
   network-wvp:
-
 
 volumes:
   redis-data:
