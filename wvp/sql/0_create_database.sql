@@ -1,2 +1,2 @@
-create database wvp
-use wvp
+create database wvp;
+use wvp;
