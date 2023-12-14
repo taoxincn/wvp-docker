@@ -6,7 +6,7 @@
 
 ### 第一步 拉文件
 ```bash
-git clone https://github.com/imnicn/wvp-docker.git
+git clone https://github.com/taoxincn/wvp-docker.git
 ```
 
 ### 第二步 修改编排文件
